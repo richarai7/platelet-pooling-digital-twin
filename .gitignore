@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+ENV/
+env/
+.Python
+
+# Azure Functions
+local.settings.json
+*.local.json
+__blobstorage__/
+__queuestorage__/
+__azurite_db*__.json
+.python_packages/
+
+# Environment files
+.env
+.env.local
+*.env
+
+# IDEs
+.vscode/
+.idea/
+*.sw
+
+p
+*.bak
+*.tmp
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Frontend build
+frontend/dist/
+frontend/build/
+frontend/.next/
+frontend/.nuxt/
+frontend/.cache/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+coverage/
+*.cover
+.hypothesis/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Azure
+.azure/
+
+# Logs
+*.log
+logs/
