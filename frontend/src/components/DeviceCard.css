@@ -1,0 +1,121 @@
+.device-card {
+  background-color: var(--bg-light);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.device-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.device-card.state-processing {
+  border-color: var(--primary-color);
+}
+
+.device-card.state-error {
+  border-color: var(--error-color);
+}
+
+.device-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.device-icon {
+  font-size: 2rem;
+}
+
+.device-info {
+  flex: 1;
+}
+
+.device-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.device-type {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.device-card-body {
+  padding: 1rem;
+}
+
+.processing-info {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: rgba(0, 120, 212, 0.1);
+  border-left: 3px solid var(--primary-color);
+  border-radius: 4px;
+}
+
+.processing-info p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+.batch-id {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.time-remaining {
+  color: var(--text-secondary);
+}
+
+.error-info {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: rgba(209, 52, 56, 0.1);
+  border-left: 3px solid var(--error-color);
+  border-radius: 4px;
+  color: var(--error-color);
+  font-size: 0.875rem;
+}
+
+.device-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 0.75rem;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.metric-value {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.device-card-footer {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.last-update {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}

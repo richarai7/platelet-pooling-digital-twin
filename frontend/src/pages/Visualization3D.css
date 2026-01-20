@@ -1,0 +1,133 @@
+.visualization-3d {
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+}
+
+.viz-container {
+  flex: 1;
+  position: relative;
+  background-color: var(--bg-light);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.babylon-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Device Details Panel */
+.device-details-panel {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(30, 30, 30, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-width: 300px;
+  max-width: 400px;
+  backdrop-filter: blur(10px);
+}
+
+.device-details-panel h3 {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: var(--text-primary);
+}
+
+.device-info p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+}
+
+.error-text {
+  color: var(--error-color);
+}
+
+/* Controls Panel */
+.controls-panel {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background-color: rgba(30, 30, 30, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.controls-panel h4 {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+.controls-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.controls-panel li {
+  margin: 0.25rem 0;
+}
+
+.legend {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.color-box.idle {
+  background-color: rgb(138, 136, 134);
+}
+
+.color-box.processing {
+  background-color: rgb(0, 120, 212);
+}
+
+.color-box.error {
+  background-color: rgb(209, 52, 56);
+}

@@ -1,0 +1,119 @@
+.process-flow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.stage {
+  flex: 1;
+  min-width: 250px;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.stage-header h4 {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.125rem;
+}
+
+.stage-count {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.stage-devices {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.device-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.device-indicator:hover {
+  transform: scale(1.1);
+}
+
+.device-indicator.idle {
+  background-color: rgba(138, 136, 134, 0.2);
+  border-color: var(--idle-color);
+}
+
+.device-indicator.processing {
+  background-color: rgba(0, 120, 212, 0.2);
+  border-color: var(--primary-color);
+  animation: pulse 2s infinite;
+}
+
+.device-indicator.error {
+  background-color: rgba(209, 52, 56, 0.2);
+  border-color: var(--error-color);
+  animation: blink 1s infinite;
+}
+
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.device-indicator.idle .indicator-dot {
+  color: var(--idle-color);
+}
+
+.device-indicator.processing .indicator-dot {
+  color: var(--primary-color);
+}
+
+.device-indicator.error .indicator-dot {
+  color: var(--error-color);
+}
+
+.flow-arrow {
+  font-size: 2rem;
+  color: var(--text-secondary);
+  padding: 0 0.5rem;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.3;
+  }
+}

@@ -1,0 +1,5 @@
+^U
+
+^X
+cd /workspaces/platelet-pooling-digital-twin/simulators
+python test_local.py
