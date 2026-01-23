@@ -4,11 +4,15 @@ A comprehensive digital twin simulation platform for optimizing platelet pooling
 
 ## Overview
 
-This project creates a cloud-native digital twin that simulates the end-to-end platelet pooling process. By connecting device simulators to Azure Digital Twins via Azure IoT Hub, the system enables "what-if" scenario modeling without disrupting real lab operations.
+This project provides **two complementary approaches** to simulating the platelet pooling process:
+
+1. **SimPy Discrete-Event Simulation** (for process analysis and optimization)
+2. **Azure Cloud Digital Twin** (for real-time monitoring and integration)
 
 ### Key Features
 
 - **12 Device Simulators**: Complete workflow simulation from centrifuge to final release
+- **SimPy-based Process Simulation**: Fast discrete-event simulation for capacity planning and bottleneck analysis
 - **Real-time Visualization**: Interactive 2D dashboard and 3D lab environment view
 - **Scenario Modeling**: Configure device counts, staff levels, and process parameters
 - **Predictive Analytics**: Forecast capacity, throughput, and resource utilization
@@ -25,6 +29,17 @@ Lab operations currently lack a holistic, real-time view of the platelet pooling
 
 ## Architecture
 
+### SimPy Discrete-Event Simulation (Local)
+```
+Batch Generator → 12 SimPy Device Simulators → Metrics & Analysis
+   (Process-based discrete-event simulation)
+   - Fast execution (simulated time)
+   - Queue modeling
+   - Resource contention
+   - Statistical analysis
+```
+
+### Azure Cloud Digital Twin (Production)
 ```
 Device Simulators (Python)
         ↓
@@ -45,7 +60,9 @@ Frontend (React)  Azure Data Explorer
 ```
 platelet-pooling-digital-twin/
 ├── simulators/          # Device simulators
-│   ├── devices/         # 12 device implementations
+│   ├── simpy_core/      # SimPy base classes
+│   ├── simpy_devices/   # 12 SimPy device simulators
+│   ├── devices/         # Azure IoT device implementations
 │   ├── core/            # Shared simulator logic
 │   └── tests/           # Simulator tests
 ├── infra/               # Azure infrastructure
@@ -71,6 +88,38 @@ platelet-pooling-digital-twin/
 ```
 
 ## Quick Start
+
+### SimPy Simulation (Recommended for Analysis)
+
+**Fast, local simulation for capacity planning and optimization**
+
+1. **Install dependencies**
+   ```bash
+   cd simulators
+   pip install -r requirements.txt
+   ```
+
+2. **Run interactive demo**
+   ```bash
+   python simpy_demo.py
+   ```
+   
+   Or run specific scenarios:
+   ```bash
+   python simpy_demo.py basic        # Basic 1-hour simulation
+   python simpy_demo.py stress       # High-volume stress test
+   python simpy_demo.py capacity     # Compare device configurations
+   ```
+
+3. **Analyze results**
+   - View device utilization
+   - Identify bottlenecks
+   - Test "what-if" scenarios
+   - No Azure account required!
+
+📖 **See [GETTING_STARTED_SIMPY.md](simulators/GETTING_STARTED_SIMPY.md) for detailed guide**
+
+### Azure Deployment (For Production Monitoring)
 
 ### Prerequisites
 

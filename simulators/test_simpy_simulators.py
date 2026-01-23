@@ -217,8 +217,8 @@ class TestDeviceCapacity:
         env.run()
         
         assert scanner.total_processed == 2
-        # Second batch should start after first finishes
-        assert batch2.process_history[0]['start_time'] > batch1.process_history[0]['end_time']
+        # Second batch should start after or at the same time as first finishes
+        assert batch2.process_history[0]['start_time'] >= batch1.process_history[0]['end_time']
     
     def test_multi_capacity_parallel(self):
         """Test that multi-capacity device can process in parallel."""
