@@ -1,0 +1,356 @@
+{
+  "@context": "dtmi:dtdl:context;3",
+  "@id": "dtmi:platelet:device:BarcodeReader;1",
+  "@type": "Interface",
+  "displayName": "Barcode Reader",
+  "description": "A final verification barcode reader that scans products before shipping to ensure tracking and traceability.",
+  "comment": "Simulates a barcode reader in the platelet pooling process",
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "deviceId",
+      "displayName": "Device ID",
+      "description": "Unique identifier for this device instance",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "deviceType",
+      "displayName": "Device Type",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "state",
+      "displayName": "Device State",
+      "description": "Current operational state of the device",
+      "schema": {
+        "@type": "Enum",
+        "valueSchema": "string",
+        "enumValues": [
+          {
+            "name": "idle",
+            "enumValue": "idle",
+            "displayName": "Idle"
+          },
+          {
+            "name": "processing",
+            "enumValue": "processing",
+            "displayName": "Processing"
+          },
+          {
+            "name": "error",
+            "enumValue": "error",
+            "displayName": "Error"
+          },
+          {
+            "name": "maintenance",
+            "enumValue": "maintenance",
+            "displayName": "Maintenance"
+          }
+        ]
+      },
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "isProcessing",
+      "displayName": "Is Processing",
+      "description": "Whether the device is currently processing a batch",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "currentBatchId",
+      "displayName": "Current Batch ID",
+      "description": "ID of the batch currently being processed",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "errorState",
+      "displayName": "Error State",
+      "description": "Description of current error, if any",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "laser_power_mw",
+      "displayName": "Laser Power",
+      "description": "Current laser power in milliwatts",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "laser_power_mw",
+      "displayName": "Current Laser Power",
+      "description": "Current laser power in milliwatts (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "scan_in_progress",
+      "displayName": "Scan In Progress",
+      "description": "Whether a scan is currently in progress",
+      "schema": "boolean"
+    },
+    {
+      "@type": "Property",
+      "name": "scan_in_progress",
+      "displayName": "Current Scan Status",
+      "description": "Whether a scan is currently in progress (as property for twin state)",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "last_barcode",
+      "displayName": "Last Barcode",
+      "description": "Last scanned barcode value",
+      "schema": "string"
+    },
+    {
+      "@type": "Property",
+      "name": "last_barcode",
+      "displayName": "Current Last Barcode",
+      "description": "Last scanned barcode value (as property for twin state)",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "last_scan_quality",
+      "displayName": "Last Scan Quality",
+      "description": "Quality score of last scan (0-1)",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "last_scan_quality",
+      "displayName": "Current Last Scan Quality",
+      "description": "Quality score of last scan (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "verification_status",
+      "displayName": "Verification Status",
+      "description": "Current verification status",
+      "schema": "string"
+    },
+    {
+      "@type": "Property",
+      "name": "verification_status",
+      "displayName": "Current Verification Status",
+      "description": "Current verification status (as property for twin state)",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "remaining_time_seconds",
+      "displayName": "Remaining Time",
+      "description": "Seconds remaining in current scan operation",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "total_scans",
+      "displayName": "Total Scans",
+      "description": "Total number of scan attempts",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "successful_scans",
+      "displayName": "Successful Scans",
+      "description": "Total number of successful scans",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "failed_scans",
+      "displayName": "Failed Scans",
+      "description": "Total number of failed scans",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "verification_failures",
+      "displayName": "Verification Failures",
+      "description": "Total number of verification failures",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Telemetry",
+      "name": "success_rate",
+      "displayName": "Success Rate",
+      "description": "Scan success rate percentage",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "success_rate",
+      "displayName": "Current Success Rate",
+      "description": "Current scan success rate percentage (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "total_runtime_hours",
+      "displayName": "Total Runtime Hours",
+      "description": "Total operational runtime in hours",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "lastTelemetryTime",
+      "displayName": "Last Telemetry Time",
+      "description": "Timestamp of last telemetry update",
+      "schema": "dateTime",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingStarted",
+      "displayName": "Processing Started Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingComplete",
+      "displayName": "Processing Complete Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "scanTimeSeconds",
+            "schema": "double"
+          },
+          {
+            "name": "success",
+            "schema": "boolean"
+          },
+          {
+            "name": "qualityMetrics",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "scanQuality",
+                  "schema": "double"
+                },
+                {
+                  "name": "barcodeReadable",
+                  "schema": "boolean"
+                },
+                {
+                  "name": "dataValid",
+                  "schema": "boolean"
+                }
+              ]
+            }
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "deviceError",
+      "displayName": "Device Error Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "errorState",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "startProcessing",
+      "displayName": "Start Processing",
+      "description": "Start processing a new batch",
+      "request": {
+        "name": "batchId",
+        "schema": "string"
+      },
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "stopProcessing",
+      "displayName": "Stop Processing",
+      "description": "Stop the current processing operation",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "clearError",
+      "displayName": "Clear Error",
+      "description": "Clear the current error state",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    }
+  ]
+}

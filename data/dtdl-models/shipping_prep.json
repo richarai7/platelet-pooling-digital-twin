@@ -1,0 +1,369 @@
+{
+  "@context": "dtmi:dtdl:context;3",
+  "@id": "dtmi:platelet:device:ShippingPrep;1",
+  "@type": "Interface",
+  "displayName": "Shipping Prep",
+  "description": "A shipping preparation station that packages and documents platelet products for distribution to hospitals.",
+  "comment": "Simulates a shipping prep station in the platelet pooling process",
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "deviceId",
+      "displayName": "Device ID",
+      "description": "Unique identifier for this device instance",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "deviceType",
+      "displayName": "Device Type",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "state",
+      "displayName": "Device State",
+      "description": "Current operational state of the device",
+      "schema": {
+        "@type": "Enum",
+        "valueSchema": "string",
+        "enumValues": [
+          {
+            "name": "idle",
+            "enumValue": "idle",
+            "displayName": "Idle"
+          },
+          {
+            "name": "processing",
+            "enumValue": "processing",
+            "displayName": "Processing"
+          },
+          {
+            "name": "error",
+            "enumValue": "error",
+            "displayName": "Error"
+          },
+          {
+            "name": "maintenance",
+            "enumValue": "maintenance",
+            "displayName": "Maintenance"
+          }
+        ]
+      },
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "isProcessing",
+      "displayName": "Is Processing",
+      "description": "Whether the device is currently processing a batch",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "currentBatchId",
+      "displayName": "Current Batch ID",
+      "description": "ID of the batch currently being processed",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "errorState",
+      "displayName": "Error State",
+      "description": "Description of current error, if any",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "package_temperature_celsius",
+      "displayName": "Package Temperature",
+      "description": "Current package temperature",
+      "schema": "double",
+      "unit": "degreeCelsius"
+    },
+    {
+      "@type": "Property",
+      "name": "package_temperature_celsius",
+      "displayName": "Current Package Temperature",
+      "description": "Current package temperature (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "insulation_integrity_percent",
+      "displayName": "Insulation Integrity",
+      "description": "Insulation integrity percentage",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "insulation_integrity_percent",
+      "displayName": "Current Insulation Integrity",
+      "description": "Current insulation integrity percentage (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "packaging_complete",
+      "displayName": "Packaging Complete",
+      "description": "Whether packaging stage is complete",
+      "schema": "boolean"
+    },
+    {
+      "@type": "Property",
+      "name": "packaging_complete",
+      "displayName": "Current Packaging Status",
+      "description": "Whether packaging stage is complete (as property for twin state)",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "documentation_complete",
+      "displayName": "Documentation Complete",
+      "description": "Whether documentation stage is complete",
+      "schema": "boolean"
+    },
+    {
+      "@type": "Property",
+      "name": "documentation_complete",
+      "displayName": "Current Documentation Status",
+      "description": "Whether documentation stage is complete (as property for twin state)",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "temperature_monitor_active",
+      "displayName": "Temperature Monitor Active",
+      "description": "Whether temperature monitor is active",
+      "schema": "boolean"
+    },
+    {
+      "@type": "Property",
+      "name": "temperature_monitor_active",
+      "displayName": "Current Temperature Monitor Status",
+      "description": "Whether temperature monitor is active (as property for twin state)",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "remaining_time_seconds",
+      "displayName": "Remaining Time",
+      "description": "Seconds remaining in current prep operation",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "insulation_boxes_available",
+      "displayName": "Insulation Boxes Available",
+      "description": "Number of insulation boxes in stock",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "temperature_monitors_available",
+      "displayName": "Temperature Monitors Available",
+      "description": "Number of temperature monitors in stock",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "documentation_forms_available",
+      "displayName": "Documentation Forms Available",
+      "description": "Number of documentation forms in stock",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "shipments_prepared",
+      "displayName": "Shipments Prepared",
+      "description": "Total number of shipments successfully prepared",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "shipment_failures",
+      "displayName": "Shipment Failures",
+      "description": "Total number of shipment prep failures",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Telemetry",
+      "name": "success_rate",
+      "displayName": "Success Rate",
+      "description": "Shipment prep success rate percentage",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "success_rate",
+      "displayName": "Current Success Rate",
+      "description": "Current shipment prep success rate percentage (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "total_runtime_hours",
+      "displayName": "Total Runtime Hours",
+      "description": "Total operational runtime in hours",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "lastTelemetryTime",
+      "displayName": "Last Telemetry Time",
+      "description": "Timestamp of last telemetry update",
+      "schema": "dateTime",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingStarted",
+      "displayName": "Processing Started Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingComplete",
+      "displayName": "Processing Complete Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "prepTimeMinutes",
+            "schema": "double"
+          },
+          {
+            "name": "success",
+            "schema": "boolean"
+          },
+          {
+            "name": "qualityMetrics",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "packagingIntegrity",
+                  "schema": "double"
+                },
+                {
+                  "name": "insulationQuality",
+                  "schema": "double"
+                },
+                {
+                  "name": "documentationComplete",
+                  "schema": "boolean"
+                },
+                {
+                  "name": "temperatureMonitorFunctional",
+                  "schema": "boolean"
+                }
+              ]
+            }
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "deviceError",
+      "displayName": "Device Error Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "errorState",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "startProcessing",
+      "displayName": "Start Processing",
+      "description": "Start processing a new batch",
+      "request": {
+        "name": "batchId",
+        "schema": "string"
+      },
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "stopProcessing",
+      "displayName": "Stop Processing",
+      "description": "Stop the current processing operation",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "clearError",
+      "displayName": "Clear Error",
+      "description": "Clear the current error state",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    }
+  ]
+}
