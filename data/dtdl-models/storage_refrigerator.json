@@ -1,0 +1,370 @@
+{
+  "@context": "dtmi:dtdl:context;3",
+  "@id": "dtmi:platelet:device:StorageRefrigerator;1",
+  "@type": "Interface",
+  "displayName": "Storage Refrigerator",
+  "description": "A controlled temperature storage unit for platelet products maintaining 20-24°C with agitation.",
+  "comment": "Simulates a storage refrigerator in the platelet pooling process",
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "deviceId",
+      "displayName": "Device ID",
+      "description": "Unique identifier for this device instance",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "deviceType",
+      "displayName": "Device Type",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "state",
+      "displayName": "Device State",
+      "description": "Current operational state of the device",
+      "schema": {
+        "@type": "Enum",
+        "valueSchema": "string",
+        "enumValues": [
+          {
+            "name": "idle",
+            "enumValue": "idle",
+            "displayName": "Idle"
+          },
+          {
+            "name": "processing",
+            "enumValue": "processing",
+            "displayName": "Processing"
+          },
+          {
+            "name": "error",
+            "enumValue": "error",
+            "displayName": "Error"
+          },
+          {
+            "name": "maintenance",
+            "enumValue": "maintenance",
+            "displayName": "Maintenance"
+          }
+        ]
+      },
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "isProcessing",
+      "displayName": "Is Processing",
+      "description": "Whether the device is currently processing a batch",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "currentBatchId",
+      "displayName": "Current Batch ID",
+      "description": "ID of the batch currently being processed",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "errorState",
+      "displayName": "Error State",
+      "description": "Description of current error, if any",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "internal_temperature_celsius",
+      "displayName": "Internal Temperature",
+      "description": "Current internal temperature",
+      "schema": "double",
+      "unit": "degreeCelsius"
+    },
+    {
+      "@type": "Property",
+      "name": "internal_temperature_celsius",
+      "displayName": "Current Internal Temperature",
+      "description": "Current internal temperature (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "target_temperature_celsius",
+      "displayName": "Target Temperature",
+      "description": "Target temperature in Celsius",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "temperature_min_celsius",
+      "displayName": "Minimum Temperature",
+      "description": "Minimum acceptable temperature in Celsius",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "temperature_max_celsius",
+      "displayName": "Maximum Temperature",
+      "description": "Maximum acceptable temperature in Celsius",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Telemetry",
+      "name": "agitation_speed_rpm",
+      "displayName": "Agitation Speed",
+      "description": "Current agitation speed in RPM",
+      "schema": "double",
+      "unit": "revolutionsPerMinute"
+    },
+    {
+      "@type": "Property",
+      "name": "agitation_speed_rpm",
+      "displayName": "Current Agitation Speed",
+      "description": "Current agitation speed in RPM (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "humidity_percent",
+      "displayName": "Humidity",
+      "description": "Current humidity percentage",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "humidity_percent",
+      "displayName": "Current Humidity",
+      "description": "Current humidity percentage (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "current_inventory_count",
+      "displayName": "Current Inventory Count",
+      "description": "Number of units currently in storage",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "max_capacity",
+      "displayName": "Maximum Capacity",
+      "description": "Maximum storage capacity",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Telemetry",
+      "name": "capacity_utilization_percent",
+      "displayName": "Capacity Utilization",
+      "description": "Current capacity utilization percentage",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "capacity_utilization_percent",
+      "displayName": "Current Capacity Utilization",
+      "description": "Current capacity utilization percentage (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "door_open",
+      "displayName": "Door Open",
+      "description": "Whether the door is currently open",
+      "schema": "boolean"
+    },
+    {
+      "@type": "Property",
+      "name": "door_open",
+      "displayName": "Current Door State",
+      "description": "Whether the door is currently open (as property for twin state)",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "alarm_active",
+      "displayName": "Alarm Active",
+      "description": "Whether an alarm is currently active",
+      "schema": "boolean"
+    },
+    {
+      "@type": "Property",
+      "name": "alarm_active",
+      "displayName": "Current Alarm State",
+      "description": "Whether an alarm is currently active (as property for twin state)",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "total_units_stored",
+      "displayName": "Total Units Stored",
+      "description": "Total number of units stored",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "temperature_excursions",
+      "displayName": "Temperature Excursions",
+      "description": "Number of temperature excursions",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "total_runtime_hours",
+      "displayName": "Total Runtime Hours",
+      "description": "Total operational runtime in hours",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "lastTelemetryTime",
+      "displayName": "Last Telemetry Time",
+      "description": "Timestamp of last telemetry update",
+      "schema": "dateTime",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingStarted",
+      "displayName": "Processing Started Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingComplete",
+      "displayName": "Processing Complete Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "success",
+            "schema": "boolean"
+          },
+          {
+            "name": "qualityMetrics",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "storageTemperatureMaintained",
+                  "schema": "boolean"
+                },
+                {
+                  "name": "agitationContinuous",
+                  "schema": "boolean"
+                },
+                {
+                  "name": "productIntegrity",
+                  "schema": "double"
+                }
+              ]
+            }
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "deviceError",
+      "displayName": "Device Error Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "errorState",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "startProcessing",
+      "displayName": "Start Processing",
+      "description": "Start processing a new batch",
+      "request": {
+        "name": "batchId",
+        "schema": "string"
+      },
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "stopProcessing",
+      "displayName": "Stop Processing",
+      "description": "Stop the current processing operation",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "clearError",
+      "displayName": "Clear Error",
+      "description": "Clear the current error state",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    }
+  ]
+}

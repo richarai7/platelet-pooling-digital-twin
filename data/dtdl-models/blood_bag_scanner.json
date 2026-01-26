@@ -1,0 +1,284 @@
+{
+  "@context": "dtmi:dtdl:context;3",
+  "@id": "dtmi:platelet:device:BloodBagScanner;1",
+  "@type": "Interface",
+  "displayName": "Blood Bag Scanner",
+  "description": "A barcode scanner used to identify and track blood bags entering the platelet pooling process.",
+  "comment": "Simulates a blood bag scanner in the platelet pooling process",
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "deviceId",
+      "displayName": "Device ID",
+      "description": "Unique identifier for this device instance",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "deviceType",
+      "displayName": "Device Type",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "state",
+      "displayName": "Device State",
+      "description": "Current operational state of the device",
+      "schema": {
+        "@type": "Enum",
+        "valueSchema": "string",
+        "enumValues": [
+          {
+            "name": "idle",
+            "enumValue": "idle",
+            "displayName": "Idle"
+          },
+          {
+            "name": "processing",
+            "enumValue": "processing",
+            "displayName": "Processing"
+          },
+          {
+            "name": "error",
+            "enumValue": "error",
+            "displayName": "Error"
+          },
+          {
+            "name": "maintenance",
+            "enumValue": "maintenance",
+            "displayName": "Maintenance"
+          }
+        ]
+      },
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "isProcessing",
+      "displayName": "Is Processing",
+      "description": "Whether the device is currently processing a batch",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "currentBatchId",
+      "displayName": "Current Batch ID",
+      "description": "ID of the batch currently being processed",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "errorState",
+      "displayName": "Error State",
+      "description": "Description of current error, if any",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "scanner_temperature_celsius",
+      "displayName": "Scanner Temperature",
+      "description": "Current scanner temperature",
+      "schema": "double",
+      "unit": "degreeCelsius"
+    },
+    {
+      "@type": "Property",
+      "name": "scanner_temperature_celsius",
+      "displayName": "Current Scanner Temperature",
+      "description": "Current scanner temperature (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "laser_power_percent",
+      "displayName": "Laser Power",
+      "description": "Current laser power percentage",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "laser_power_percent",
+      "displayName": "Current Laser Power",
+      "description": "Current laser power percentage (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "scan_success_rate",
+      "displayName": "Scan Success Rate",
+      "description": "Scan success rate percentage",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "scan_success_rate",
+      "displayName": "Current Scan Success Rate",
+      "description": "Current scan success rate percentage (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "scans_completed",
+      "displayName": "Scans Completed",
+      "description": "Total number of successful scans completed",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "scan_failures",
+      "displayName": "Scan Failures",
+      "description": "Total number of scan failures",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "total_runtime_hours",
+      "displayName": "Total Runtime Hours",
+      "description": "Total operational runtime in hours",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "lastTelemetryTime",
+      "displayName": "Last Telemetry Time",
+      "description": "Timestamp of last telemetry update",
+      "schema": "dateTime",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingStarted",
+      "displayName": "Processing Started Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingComplete",
+      "displayName": "Processing Complete Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "scanTimeSeconds",
+            "schema": "double"
+          },
+          {
+            "name": "success",
+            "schema": "boolean"
+          },
+          {
+            "name": "qualityMetrics",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "barcodeQuality",
+                  "schema": "double"
+                },
+                {
+                  "name": "readConfidence",
+                  "schema": "double"
+                }
+              ]
+            }
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "deviceError",
+      "displayName": "Device Error Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "errorState",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "startProcessing",
+      "displayName": "Start Processing",
+      "description": "Start processing a new batch",
+      "request": {
+        "name": "batchId",
+        "schema": "string"
+      },
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "stopProcessing",
+      "displayName": "Stop Processing",
+      "description": "Stop the current processing operation",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "clearError",
+      "displayName": "Clear Error",
+      "description": "Clear the current error state",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    }
+  ]
+}

@@ -1,0 +1,327 @@
+{
+  "@context": "dtmi:dtdl:context;3",
+  "@id": "dtmi:platelet:device:LabelingStation;1",
+  "@type": "Interface",
+  "displayName": "Labeling Station",
+  "description": "An automated labeling station that prints and applies labels to platelet products with tracking information.",
+  "comment": "Simulates a labeling station in the platelet pooling process",
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "deviceId",
+      "displayName": "Device ID",
+      "description": "Unique identifier for this device instance",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "deviceType",
+      "displayName": "Device Type",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "state",
+      "displayName": "Device State",
+      "description": "Current operational state of the device",
+      "schema": {
+        "@type": "Enum",
+        "valueSchema": "string",
+        "enumValues": [
+          {
+            "name": "idle",
+            "enumValue": "idle",
+            "displayName": "Idle"
+          },
+          {
+            "name": "processing",
+            "enumValue": "processing",
+            "displayName": "Processing"
+          },
+          {
+            "name": "error",
+            "enumValue": "error",
+            "displayName": "Error"
+          },
+          {
+            "name": "maintenance",
+            "enumValue": "maintenance",
+            "displayName": "Maintenance"
+          }
+        ]
+      },
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "isProcessing",
+      "displayName": "Is Processing",
+      "description": "Whether the device is currently processing a batch",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "currentBatchId",
+      "displayName": "Current Batch ID",
+      "description": "ID of the batch currently being processed",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "errorState",
+      "displayName": "Error State",
+      "description": "Description of current error, if any",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "printer_temperature_celsius",
+      "displayName": "Printer Temperature",
+      "description": "Current printer temperature",
+      "schema": "double",
+      "unit": "degreeCelsius"
+    },
+    {
+      "@type": "Property",
+      "name": "printer_temperature_celsius",
+      "displayName": "Current Printer Temperature",
+      "description": "Current printer temperature (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "label_position_accuracy_mm",
+      "displayName": "Label Position Accuracy",
+      "description": "Label position accuracy in mm",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "label_position_accuracy_mm",
+      "displayName": "Current Label Position Accuracy",
+      "description": "Current label position accuracy in mm (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "print_quality_score",
+      "displayName": "Print Quality Score",
+      "description": "Print quality score (0-100)",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "print_quality_score",
+      "displayName": "Current Print Quality Score",
+      "description": "Current print quality score (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "remaining_time_seconds",
+      "displayName": "Remaining Time",
+      "description": "Seconds remaining in current labeling operation",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "label_stock_count",
+      "displayName": "Label Stock Count",
+      "description": "Number of labels remaining in stock",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "ribbon_remaining_meters",
+      "displayName": "Ribbon Remaining",
+      "description": "Ribbon remaining in meters",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "labels_completed",
+      "displayName": "Labels Completed",
+      "description": "Total number of labels successfully applied",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "label_failures",
+      "displayName": "Label Failures",
+      "description": "Total number of labeling failures",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Telemetry",
+      "name": "success_rate",
+      "displayName": "Success Rate",
+      "description": "Labeling success rate percentage",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "success_rate",
+      "displayName": "Current Success Rate",
+      "description": "Current labeling success rate percentage (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "total_runtime_hours",
+      "displayName": "Total Runtime Hours",
+      "description": "Total operational runtime in hours",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "lastTelemetryTime",
+      "displayName": "Last Telemetry Time",
+      "description": "Timestamp of last telemetry update",
+      "schema": "dateTime",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingStarted",
+      "displayName": "Processing Started Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingComplete",
+      "displayName": "Processing Complete Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "labelTimeSeconds",
+            "schema": "double"
+          },
+          {
+            "name": "success",
+            "schema": "boolean"
+          },
+          {
+            "name": "qualityMetrics",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "printQuality",
+                  "schema": "double"
+                },
+                {
+                  "name": "positionAccuracy",
+                  "schema": "double"
+                },
+                {
+                  "name": "barcodeReadable",
+                  "schema": "boolean"
+                }
+              ]
+            }
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "deviceError",
+      "displayName": "Device Error Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "errorState",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "startProcessing",
+      "displayName": "Start Processing",
+      "description": "Start processing a new batch",
+      "request": {
+        "name": "batchId",
+        "schema": "string"
+      },
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "stopProcessing",
+      "displayName": "Stop Processing",
+      "description": "Stop the current processing operation",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "clearError",
+      "displayName": "Clear Error",
+      "description": "Clear the current error state",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    }
+  ]
+}

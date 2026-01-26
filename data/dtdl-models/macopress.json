@@ -1,0 +1,291 @@
+{
+  "@context": "dtmi:dtdl:context;3",
+  "@id": "dtmi:platelet:device:Macopress;1",
+  "@type": "Interface",
+  "displayName": "Macopress",
+  "description": "A Macopress device used for expressing plasma from platelet-rich plasma bags.",
+  "comment": "Simulates a Macopress in the platelet pooling process",
+  "contents": [
+    {
+      "@type": "Property",
+      "name": "deviceId",
+      "displayName": "Device ID",
+      "description": "Unique identifier for this device instance",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "deviceType",
+      "displayName": "Device Type",
+      "schema": "string",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "state",
+      "displayName": "Device State",
+      "description": "Current operational state of the device",
+      "schema": {
+        "@type": "Enum",
+        "valueSchema": "string",
+        "enumValues": [
+          {
+            "name": "idle",
+            "enumValue": "idle",
+            "displayName": "Idle"
+          },
+          {
+            "name": "processing",
+            "enumValue": "processing",
+            "displayName": "Processing"
+          },
+          {
+            "name": "error",
+            "enumValue": "error",
+            "displayName": "Error"
+          },
+          {
+            "name": "maintenance",
+            "enumValue": "maintenance",
+            "displayName": "Maintenance"
+          }
+        ]
+      },
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "isProcessing",
+      "displayName": "Is Processing",
+      "description": "Whether the device is currently processing a batch",
+      "schema": "boolean",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "currentBatchId",
+      "displayName": "Current Batch ID",
+      "description": "ID of the batch currently being processed",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "errorState",
+      "displayName": "Error State",
+      "description": "Description of current error, if any",
+      "schema": "string",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "pressure_psi",
+      "displayName": "Pressure",
+      "description": "Current applied pressure in PSI",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "pressure_psi",
+      "displayName": "Current Pressure",
+      "description": "Current applied pressure in PSI (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "target_pressure_psi",
+      "displayName": "Target Pressure",
+      "description": "Target pressure for expression in PSI",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Telemetry",
+      "name": "expression_rate_ml_min",
+      "displayName": "Expression Rate",
+      "description": "Current expression rate in mL/min",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "expression_rate_ml_min",
+      "displayName": "Current Expression Rate",
+      "description": "Current expression rate in mL/min (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "volume_expressed_ml",
+      "displayName": "Volume Expressed",
+      "description": "Current volume expressed in mL",
+      "schema": "double"
+    },
+    {
+      "@type": "Property",
+      "name": "volume_expressed_ml",
+      "displayName": "Current Volume Expressed",
+      "description": "Current volume expressed in mL (as property for twin state)",
+      "schema": "double",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "remaining_time_seconds",
+      "displayName": "Remaining Time",
+      "description": "Seconds remaining in current processing cycle",
+      "schema": "integer",
+      "writable": true
+    },
+    {
+      "@type": "Property",
+      "name": "cycles_completed",
+      "displayName": "Cycles Completed",
+      "description": "Total number of expression cycles completed",
+      "schema": "integer",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "total_volume_processed_ml",
+      "displayName": "Total Volume Processed",
+      "description": "Total volume processed in mL",
+      "schema": "double",
+      "writable": false
+    },
+    {
+      "@type": "Property",
+      "name": "lastTelemetryTime",
+      "displayName": "Last Telemetry Time",
+      "description": "Timestamp of last telemetry update",
+      "schema": "dateTime",
+      "writable": true
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingStarted",
+      "displayName": "Processing Started Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "processingComplete",
+      "displayName": "Processing Complete Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "batchId",
+            "schema": "string"
+          },
+          {
+            "name": "cycleTimeMinutes",
+            "schema": "double"
+          },
+          {
+            "name": "volumeExpressed",
+            "schema": "double"
+          },
+          {
+            "name": "qualityMetrics",
+            "schema": {
+              "@type": "Object",
+              "fields": [
+                {
+                  "name": "expressionEfficiency",
+                  "schema": "double"
+                },
+                {
+                  "name": "plateletPreservation",
+                  "schema": "double"
+                }
+              ]
+            }
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Telemetry",
+      "name": "deviceError",
+      "displayName": "Device Error Event",
+      "schema": {
+        "@type": "Object",
+        "fields": [
+          {
+            "name": "eventType",
+            "schema": "string"
+          },
+          {
+            "name": "errorState",
+            "schema": "string"
+          },
+          {
+            "name": "timestamp",
+            "schema": "dateTime"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "startProcessing",
+      "displayName": "Start Processing",
+      "description": "Start processing a new batch",
+      "request": {
+        "name": "batchId",
+        "schema": "string"
+      },
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "stopProcessing",
+      "displayName": "Stop Processing",
+      "description": "Stop the current processing operation",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    },
+    {
+      "@type": "Command",
+      "name": "clearError",
+      "displayName": "Clear Error",
+      "description": "Clear the current error state",
+      "response": {
+        "name": "success",
+        "schema": "boolean"
+      }
+    }
+  ]
+}
